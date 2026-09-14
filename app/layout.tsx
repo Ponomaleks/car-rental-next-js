@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 
 import './globals.css';
+import Header from '@/components/Header/Header';
+import clsx from 'clsx';
+import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 
 const manrope = Manrope({
   variable: '--font-manrope',
@@ -37,8 +40,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={`${manrope.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={clsx(manrope.variable, 'page')}>
+      <body>
+        <TanStackProvider>
+          <Header />
+          <main className="app">{children}</main>
+        </TanStackProvider>
+      </body>
     </html>
   );
 }

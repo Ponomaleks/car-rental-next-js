@@ -1,20 +1,24 @@
 import Link from 'next/link';
 
-import styles from './page.module.css';
+import css from './page.module.css';
+import clsx from 'clsx';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className="hero-content">
-        <h1>Find your perfect rental car</h1>
-        <p>
-          RentalCar helps you quickly choose a car by brand, price and mileage.
-          Browse the catalog and rent in minutes.
+    <div className={css.hero}>
+      <div className={css.heroContent}>
+        <h1 className={css.title}>Find your perfect rental car</h1>
+        <p className={css.description}>
+          Reliable and budget-friendly rentals for any journey
         </p>
-        <Link href="/catalog" className="primary-button">
+        <Link
+          href="/catalog"
+          className={clsx(css.ctaButton, 'button', 'primaryButton')}
+          aria-label="View Catalog"
+        >
           View Catalog
         </Link>
       </div>
-    </main>
+    </div>
   );
 }
