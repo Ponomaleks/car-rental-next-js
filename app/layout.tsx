@@ -14,8 +14,37 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'RentalCar App',
-  description: 'Car rental frontend application',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+  ),
+  title: {
+    default: 'RentalCar | Find Your Perfect Rental Car',
+    template: '%s | RentalCar',
+  },
+  description:
+    'Find and book reliable rental cars for any journey with RentalCar.',
+  applicationName: 'RentalCar',
+  keywords: ['car rental', 'rental cars', 'book a car', 'car hire'],
+  authors: [{ name: 'Neoversity' }],
+  creator: 'Neoversity',
+  openGraph: {
+    type: 'website',
+    siteName: 'RentalCar',
+    title: 'RentalCar | Find Your Perfect Rental Car',
+    description:
+      'Find and book reliable rental cars for any journey with RentalCar.',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RentalCar | Find Your Perfect Rental Car',
+    description:
+      'Find and book reliable rental cars for any journey with RentalCar.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },

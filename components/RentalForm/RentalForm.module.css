@@ -31,7 +31,7 @@
     outline-offset: 0px;
   }
 
-  &:placeholder {
+  &::placeholder {
     color: var(--gray);
   }
 }
@@ -52,7 +52,7 @@
     outline-offset: 0px;
   }
 
-  &:placeholder {
+  &::placeholder {
     color: var(--gray);
   }
 }

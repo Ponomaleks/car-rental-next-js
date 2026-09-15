@@ -3,10 +3,23 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import type { Metadata } from 'next';
 
 import CatalogClientPage from './Catalog.client';
 import { CarFetchParams, fetchCarFilters, fetchCars } from '@/lib/api';
 import { PAGE_SIZE } from '@/constants/pagination';
+
+export const metadata: Metadata = {
+  title: 'Car Catalog',
+  description:
+    'Browse and filter available rental cars by brand, price, and mileage.',
+  openGraph: {
+    title: 'Car Catalog | RentalCar',
+    description:
+      'Browse and filter available rental cars by brand, price, and mileage.',
+    url: '/catalog',
+  },
+};
 
 interface CatalogPageProps {
   searchParams: CarFetchParams;

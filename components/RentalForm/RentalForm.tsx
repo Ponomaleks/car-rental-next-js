@@ -60,6 +60,7 @@ export default function RentalForm({ carId }: RentalFormProps) {
 
     try {
       await RentalFormSchema.validate(values, { abortEarly: false });
+
       setError({});
 
       handleCreateRental(carId, values);

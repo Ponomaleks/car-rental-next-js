@@ -1,7 +1,20 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
 import css from './page.module.css';
 import clsx from 'clsx';
+
+export const metadata: Metadata = {
+  title: 'Find Your Perfect Rental Car',
+  description:
+    'Browse reliable and budget-friendly rental cars for your next journey.',
+  openGraph: {
+    title: 'Find Your Perfect Rental Car',
+    description:
+      'Browse reliable and budget-friendly rental cars for your next journey.',
+    url: '/',
+  },
+};
 
 export default function Home() {
   return (
