@@ -16,8 +16,14 @@
 }
 
 .logo {
-  padding: 24px 0;
+  padding: 10px 0;
   font-style: 0;
+
+  &:focus-visible {
+    outline: 1px solid var(--light-blue);
+    outline-offset: 1px;
+    border-radius: 4px;
+  }
 }
 
 .navLinks {
@@ -26,13 +32,19 @@
 }
 
 .navLink {
-  padding: 24px 0;
+  padding: 10px 0;
   transition: color 0.2s ease-in-out;
 }
 
 .navLink:hover,
 .navLink:focus {
   color: var(--light-blue);
+}
+
+.navLink:focus-visible {
+  outline: 1px solid var(--light-blue);
+  outline-offset: 1px;
+  border-radius: 4px;
 }
 
 .active {

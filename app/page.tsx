@@ -13,7 +13,7 @@ export default function Home() {
         </p>
         <Link
           href="/catalog"
-          className={clsx(css.ctaButton, 'button', 'primaryButton')}
+          className={clsx(css.ctaButton, 'button', 'button_primary')}
           aria-label="View Catalog"
         >
           View Catalog

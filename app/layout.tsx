@@ -3,12 +3,14 @@ import { Manrope } from 'next/font/google';
 
 import './globals.css';
 import Header from '@/components/Header/Header';
-import clsx from 'clsx';
 import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+import ToastWrapper from '@/components/ToastWrapper/ToastWrapper';
 
 const manrope = Manrope({
-  variable: '--font-manrope',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-manrope',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -40,11 +42,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={clsx(manrope.variable, 'page')}>
-      <body>
+    <html lang="en" className="page">
+      <head>
+        <link rel="preconnect" href="https://ac.goit.global" />
+        <link rel="dns-prefetch" href="https://ac.goit.global" />
+      </head>
+      <body className={manrope.variable}>
         <TanStackProvider>
           <Header />
           <main className="app">{children}</main>
+          <ToastWrapper />
         </TanStackProvider>
       </body>
     </html>

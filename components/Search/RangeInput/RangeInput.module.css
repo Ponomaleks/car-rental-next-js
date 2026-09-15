@@ -1,0 +1,70 @@
+.mileageFieldset {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 320px;
+  border: none;
+  padding: 0;
+}
+
+.mileageLegend {
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 1.33;
+  margin-bottom: 8px;
+}
+
+.rangeInputsContainer {
+  display: flex;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+
+.input {
+  display: flex;
+  left: 0;
+  width: 100%;
+  padding: 12px 24px;
+  background-color: var(--white);
+  border: none;
+  font-size: 16px;
+  line-height: 1.26;
+  appearance: textfield;
+  outline-offset: 0;
+  outline-color: var(--light-blue);
+
+  transition:
+    outline-color 250ms ease-in-out,
+    outline-offset 250ms ease-in-out,
+    color 250ms ease-in-out;
+
+  &::placeholder {
+    color: var(--main);
+  }
+}
+
+.input.leftInput {
+  border-right: 1px solid var(--gray-light);
+  border-radius: 12px 0 0 12px;
+}
+
+.input.rightInput {
+  border-radius: 0 12px 12px 0;
+}
+
+.input:focus {
+  outline: 1px solid var(--light-blue);
+  outline-offset: 1px;
+  z-index: 1;
+  border: none;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

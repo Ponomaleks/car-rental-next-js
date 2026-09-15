@@ -1,3 +1,4 @@
+import axios from "axios";
 import type { Car } from "@/types/car";
 
 const PAGE_SIZE_DEFAULT = 12
@@ -26,12 +27,25 @@ export interface RentalPayload {
   comment: string;
 }
 
+export interface RentalResponse {
+  message: string;
+}
+
 export interface CarsResponse {
   cars: Car[];
   "totalCars": number;
   "page": number;
   "totalPages": number;
   "perPage": number;
+}
+
+interface CarsApiData {
+  cars?: unknown;
+  results?: unknown;
+  page?: unknown;
+  perPage?: unknown;
+  totalCars?: unknown;
+  totalPages?: unknown;
 }
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -50,20 +64,20 @@ function buildUrl(path: string, params?: Record<string, string | number | undefi
   return url.toString();
 }
 
-async function parseCarsResponse(response: Response, page: number, perPage: number): Promise<CarsResponse> {
-  const data = await response.json();
+function parseCarsResponse(data: unknown, page: number, perPage: number): CarsResponse {
+  const responseData: CarsApiData = typeof data === "object" && data !== null ? data : {};
   const cars: Car[] = Array.isArray(data)
     ? data
-    : Array.isArray(data?.cars)
-      ? data.cars
-      : Array.isArray(data?.results)
-        ? data.results
+    : Array.isArray(responseData.cars)
+      ? responseData.cars
+      : Array.isArray(responseData.results)
+        ? responseData.results
         : [];
 
-  const responsePage = typeof data?.page === "number" ? data.page : page;
-  const responsePerPage = typeof data?.perPage === "number" ? data.perPage : perPage;
-  const totalCars = typeof data?.totalCars === "number" ? data.totalCars : cars.length;
-  const totalPages = typeof data?.totalPages === "number" ? data.totalPages : Math.ceil(totalCars / perPage);
+  const responsePage = typeof responseData.page === "number" ? responseData.page : page;
+  const responsePerPage = typeof responseData.perPage === "number" ? responseData.perPage : perPage;
+  const totalCars = typeof responseData.totalCars === "number" ? responseData.totalCars : cars.length;
+  const totalPages = typeof responseData.totalPages === "number" ? responseData.totalPages : Math.ceil(totalCars / perPage);
   const hasMore = page < totalPages;
 
   return {
@@ -80,63 +94,70 @@ export async function fetchCars({
   page,
   perPage = PAGE_SIZE_DEFAULT
 }: FetchCarsOptions): Promise<CarsResponse> {
-  const response = await fetch(
-    buildUrl("/cars", {
-      page,
-      perPage,
-      brand: filters.brand,
-      price: filters.price,
-      minMileage: filters.minMileage,
-      maxMileage: filters.maxMileage,
-    }),
-    { cache: "no-store" },
-  );
+  try {
+    const response = await axios.get(
+      buildUrl("/cars", {
+        page,
+        perPage,
+        brand: filters.brand,
+        price: filters.price,
+        minMileage: filters.minMileage,
+        maxMileage: filters.maxMileage,
+      }),
+    );
 
-  if (!response.ok) {
+    return parseCarsResponse(response.data, page, perPage);
+  } catch {
     throw new Error("Failed to load cars");
   }
-
-  return parseCarsResponse(response, page, perPage);
 }
 
 export async function fetchCarFilters(): Promise<CarFilters> {
-  const response = await fetch(buildUrl("/cars/filters"), { cache: "no-store" });
+  try {
+    const response = await axios.get<CarFilters>(buildUrl("/cars/filters"));
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return {
+        "brands": [
+        ],
+        "price": {
+          min: 30,
+          max: 80
+        }
+      };
+    }
 
-  if (!response.ok) {
-    return {
-      "brands": [
-      ],
-      "price": {
-        min: 30,
-        max: 80
-      }
-    };
+    throw error;
   }
-
-  const data = await response.json();
-  return data;
 }
 
 export async function fetchCarById(carId: string): Promise<Car> {
-  const response = await fetch(buildUrl(`/cars/${carId}`), { cache: "no-store" });
+  try {
+    const response = await axios.get<Car>(buildUrl(`/cars/${carId}`));
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error("Car not found");
+    }
 
-  if (!response.ok) {
-    throw new Error("Car not found");
+    throw error;
   }
-
-  return response.json();
 }
 
-export async function submitRental(id: number, payload: RentalPayload): Promise<void> {
-  const response = await fetch(buildUrl(`${id}/booking-requests`), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+export async function submitRental(id: number, payload: RentalPayload): Promise<RentalResponse> {
+  try {
+    const response = await axios.post<RentalResponse>(
+      buildUrl(`/cars/${id}/booking-requests`),
+      payload,
+    );
 
-  if (!response.ok) {
-    throw new Error("Failed to submit rental request");
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error("Failed to submit rental request");
+    }
+
+    throw error;
   }
 }

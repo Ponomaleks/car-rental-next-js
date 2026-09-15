@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 414px;
+  height: 388px;
+  margin-bottom: 40px;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.33;
+  color: var(--color-dark);
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-dark);
+  max-width: 350px;
+  margin-bottom: 40px;
+}

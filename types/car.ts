@@ -21,3 +21,9 @@ export interface Car {
   mileage: number;
 }
 
+
+export interface RentalFormData {
+  name: string;
+  email: string;
+  comment: string;
+}

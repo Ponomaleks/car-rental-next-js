@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 * {
   box-sizing: border-box;
@@ -51,8 +51,8 @@ a {
   margin-bottom: 28px;
 }
 
-.primary-button,
-.secondary-button {
+.button_primary,
+.button_secondary {
   border: none;
   border-radius: 12px;
   padding: 14px 24px;
@@ -63,17 +63,17 @@ a {
   align-items: center;
 }
 
-.primary-button {
+.button_primary {
   background: #3470ff;
   color: #fff;
 }
 
-.primary-button:hover,
-.primary-button:focus-visible {
+.button_primary:hover,
+.button_primary:focus-visible {
   background: #0b44cd;
 }
 
-.secondary-button {
+.button_secondary {
   margin: 32px auto 0;
   background: transparent;
   border: 1px solid #3470ff;

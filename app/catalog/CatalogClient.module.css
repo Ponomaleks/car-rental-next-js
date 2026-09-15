@@ -1,0 +1,21 @@
+.catalogContainer {
+  padding-bottom: 104px;
+}
+
+.carsGrid {
+  position: relative;
+}
+
+.searchSection {
+  padding-top: 84px;
+  margin-bottom: 88px;
+}
+
+.carsGrid {
+  margin-bottom: 48px;
+}
+
+.loadMoreButton {
+  display: block;
+  margin: 0 auto;
+}
