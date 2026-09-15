@@ -56,6 +56,7 @@ export default function Search({
         placeholder="Choose a price"
         value={draftFilters.price ?? ''}
         options={priceOptions ?? []}
+        formatSelectedValue={selectedLabel => `To $${selectedLabel}`}
         onChange={val =>
           setDraftFilters(prev => ({
             ...prev,

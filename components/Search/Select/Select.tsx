@@ -19,7 +19,7 @@ interface SelectProps {
   options: string[];
   onChange: (value: string) => void;
   formatSelectedValue?: (selectedLabel: string) => string;
-  name?: string; // Optional name prop for the hidden input
+  name?: string;
 }
 
 export default function Select({
