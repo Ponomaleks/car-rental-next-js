@@ -19,7 +19,7 @@ export default function CarDetailsPage() {
     error,
   } = useQuery<Car>({
     enabled: Boolean(carId),
-    queryKey: ['note', carId],
+    queryKey: ['car', carId],
     queryFn: () => fetchCarById(carId),
     refetchOnMount: false,
     staleTime: 1000 * 60, // 60 seconds

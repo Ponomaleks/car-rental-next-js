@@ -1,20 +1,17 @@
 .hero {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-grow: 1;
   margin: 0 auto;
-  background: rgba(0, 0, 0, 0.2), url(/images/hero/hero.webp);
+  background: rgba(0, 0, 0, 0.2);
   max-width: 1440px;
   height: 700px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 }
 
-@media (min-resolution: 192dpi), (min-resolution: 2dppx) {
-  .hero {
-    background-image: rgba(0, 0, 0, 0.2), url(/images/hero/hero@2x.webp);
-  }
+.heroImage {
+  object-fit: cover;
+  z-index: -1;
 }
 
 .heroContent {

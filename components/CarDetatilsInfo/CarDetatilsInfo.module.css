@@ -91,6 +91,10 @@
   font-size: 16px;
   line-height: 1.25;
 
+  strong {
+    font-weight: 500;
+  }
+
   &:not(:last-child) {
     margin-bottom: 16px;
   }

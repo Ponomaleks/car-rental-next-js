@@ -4,7 +4,7 @@ import type { AxiosError } from "axios";
 import { RentalPayload, RentalResponse } from "@/lib/api";
 
 interface UseCreateRentalMutation {
-  createNoteFn: (id: number, payload: RentalPayload) => Promise<RentalResponse>;
+  createRentalFn: (id: number, payload: RentalPayload) => Promise<RentalResponse>;
 }
 
 type CreateRentalMutationVariables = {
@@ -12,7 +12,7 @@ type CreateRentalMutationVariables = {
   payload: RentalPayload;
 };
 
-export const useCreateRentalMutation = ({ createNoteFn }: UseCreateRentalMutation) => {
+export const useCreateRentalMutation = ({ createRentalFn }: UseCreateRentalMutation) => {
   const queryClient = useQueryClient();
 
   const createRentalMutation = useMutation<
@@ -20,9 +20,9 @@ export const useCreateRentalMutation = ({ createNoteFn }: UseCreateRentalMutatio
     Error | AxiosError,
     CreateRentalMutationVariables
   >({
-    mutationFn: ({ id, payload }) => createNoteFn(id, payload),
+    mutationFn: ({ id, payload }) => createRentalFn(id, payload),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      queryClient.invalidateQueries({ queryKey: ["rental"] });
     },
     onError: (error: Error | AxiosError) => {
       toast.error(

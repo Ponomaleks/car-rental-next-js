@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { cache } from 'react';
 import {
   dehydrate,
   HydrationBoundary,
@@ -15,13 +16,15 @@ interface CarPageProps {
   params: Promise<{ carId: string }>;
 }
 
+const getCarById = cache((carId: string) => fetchCarById(carId));
+
 export async function generateMetadata({
   params,
 }: CarPageProps): Promise<Metadata> {
   const { carId } = await params;
 
   try {
-    const car = await fetchCarById(carId);
+    const car = await getCarById(carId);
     const carName = `${car.brand} ${car.model}`;
     const description = `Rent a ${carName} ${car.year} from ${car.rentalCompany}. ${car.description}`;
 
@@ -65,15 +68,15 @@ export async function generateMetadata({
 export default async function CarPage({ params }: CarPageProps) {
   const { carId } = await params;
   const queryClient = new QueryClient();
+  let car;
 
-  await queryClient
-    .query({
-      queryKey: ['note', carId],
-      queryFn: () => fetchCarById(carId),
-    })
-    .catch(() => {
-      notFound();
-    });
+  try {
+    car = await getCarById(carId);
+  } catch {
+    notFound();
+  }
+
+  queryClient.setQueryData(['car', carId], car);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

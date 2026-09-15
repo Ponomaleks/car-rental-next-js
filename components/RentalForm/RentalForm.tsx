@@ -52,7 +52,7 @@ export default function RentalForm({ carId }: RentalFormProps) {
     error: mutationError,
     data,
   } = useCreateRentalMutation({
-    createNoteFn: submitRental,
+    createRentalFn: submitRental,
   });
 
   const formAction = async (formData: FormData) => {

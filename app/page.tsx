@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 import css from './page.module.css';
@@ -19,6 +20,15 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className={css.hero}>
+      <Image
+        src="/images/hero/hero@2x.webp"
+        alt="Rental cars on a scenic road"
+        fill
+        sizes="(max-width: 768px) 100%, 100%"
+        preload
+        className={clsx(css.heroImage, 'image')}
+        style={{ objectFit: 'cover' }}
+      />
       <div className={css.heroContent}>
         <h1 className={css.title}>Find your perfect rental car</h1>
         <p className={css.description}>

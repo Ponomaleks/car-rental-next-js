@@ -6,9 +6,10 @@ import css from './CarCard.module.css';
 
 interface CarProps {
   car: Car;
+  priority?: boolean;
 }
 
-export default function CarCard({ car }: CarProps) {
+export default function CarCard({ car, priority = false }: CarProps) {
   return (
     <article className={css.carCard}>
       <div className={css.imgContainer}>
@@ -16,9 +17,9 @@ export default function CarCard({ car }: CarProps) {
           src={car.img}
           alt={`${car.brand} ${car.model}`}
           fill
+          priority={priority}
           sizes="(max-width: 768px) 100vw, 244px"
           className={css.img}
-          loading="eager"
         />
       </div>
       <header className={css.carHeader}>
