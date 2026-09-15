@@ -27,7 +27,7 @@ export default function CarDetailsPage() {
 
   if (error || !car) {
     return (
-      <div className="container">
+      <div className="container" role="alert">
         <h1>Car not found</h1>
         <p>The car you are looking for does not exist.</p>
       </div>
@@ -37,7 +37,7 @@ export default function CarDetailsPage() {
   return (
     <div className={clsx(css.detailsContainer, `container`)}>
       <article className={css.detailsArticle}>
-        <h1 className="visually-hidden">
+        <h1 id="car-details-title" className="visually-hidden">
           Car {car.brand}&nbsp;{car.model} details page
         </h1>
         <aside className={css.detailsAsideContainer}>

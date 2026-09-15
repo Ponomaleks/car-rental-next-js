@@ -87,17 +87,31 @@
 }
 
 .customSelectOption {
+  margin: 0 2px;
+  border-radius: 2px;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.25;
   color: var(--gray);
   cursor: pointer;
   transition: color 250ms ease-in-out;
+
+  &:first-child {
+    margin-top: 2px;
+  }
+  &:last-child {
+    margin-bottom: 2px;
+  }
 }
 
 .customSelectOption:hover,
 .customSelectOption.selected {
   color: var(--main);
+}
+
+.customSelectOption:focus-visible {
+  outline: 1px solid var(--light-blue);
+  outline-offset: 1px;
 }
 
 .customSelectList::-webkit-scrollbar {

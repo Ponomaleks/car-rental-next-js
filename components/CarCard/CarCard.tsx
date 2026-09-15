@@ -40,10 +40,8 @@ export default function CarCard({ car }: CarProps) {
           <p className={css.rentalCompany}>{car.rentalCompany}</p>
         </div>
         <p className={css.carInfo}>
-          <span className={css.carType} aria-hidden="true">
-            {car.type}
-          </span>
-          <span className={css.carMileage} aria-hidden="true">
+          <span className={css.carType}>{car.type}</span>
+          <span className={css.carMileage}>
             {car.mileage.toLocaleString()} km
           </span>
         </p>
@@ -53,6 +51,7 @@ export default function CarCard({ car }: CarProps) {
         className="button button_primary"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={`Read more about ${car.brand} ${car.model}`}
       >
         Read more
       </Link>

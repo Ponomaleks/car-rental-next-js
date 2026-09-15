@@ -37,7 +37,11 @@ export default function NoResults({
         We couldn’t find any cars that match your current filters. Try changing
         your search criteria or reset the filters.
       </p>
-      <button className="button button_secondary" onClick={handleReset}>
+      <button
+        type="button"
+        className="button button_secondary"
+        onClick={handleReset}
+      >
         Reset filters
       </button>
     </div>

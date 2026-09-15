@@ -25,6 +25,7 @@ export default function Search({
 }: SearchProps) {
   return (
     <form
+      aria-label="Search cars"
       onSubmit={event => {
         event.preventDefault();
 

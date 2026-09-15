@@ -1,11 +1,12 @@
 import { RENTAL_CONDITIONS } from '@/constants/pagination';
 import { Car } from '@/types/car';
-import css from './CarDetatilsInfo.module.css';
 import { IoCarSportOutline, IoLocationOutline } from 'react-icons/io5';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { BsCalendar4Week, BsFuelPump } from 'react-icons/bs';
 import { PiRoadHorizonLight } from 'react-icons/pi';
 import { FiSettings } from 'react-icons/fi';
+
+import css from './CarDetatilsInfo.module.css';
 
 interface CarDetatilsInfoProps {
   car: Car;

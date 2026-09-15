@@ -37,6 +37,7 @@ export default function Header() {
                 <Link
                   className={clsx(css.navLink, isActive && css.active)}
                   href={href}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {label}
                 </Link>

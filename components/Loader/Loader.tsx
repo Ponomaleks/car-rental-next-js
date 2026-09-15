@@ -7,9 +7,14 @@ const Loader = () => {
   useBodyOverflowHidden(false);
 
   return (
-    <div className={css.backdrop}>
+    <div
+      className={css.backdrop}
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
       <div className={css.loaderContainer}>
-        <div className={css.loader}></div>
+        <div className={css.loader} aria-hidden="true"></div>
         <h3 className={css.loaderText}>Loading...</h3>
         <p className={css.loaderSubText}>
           Please wait while we fetch the best cars for you

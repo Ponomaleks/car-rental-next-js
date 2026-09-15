@@ -123,7 +123,7 @@ export default function RentalForm({ carId }: RentalFormProps) {
   };
 
   return (
-    <form className={css.rentalForm} action={formAction}>
+    <form className={css.rentalForm} action={formAction} aria-busy={isLoading}>
       <h2 className={css.formHeader}>Book your car now</h2>
       <p className={css.formDescription}>
         Stay connected! We are always ready to help you.
@@ -139,11 +139,18 @@ export default function RentalForm({ carId }: RentalFormProps) {
           name="name"
           className={css.input}
           defaultValue={name}
+          autoComplete="name"
+          aria-invalid={Boolean(error?.name)}
+          aria-describedby={error?.name ? 'name-error' : undefined}
           onBlur={e => handleBlur(e)}
           onChange={e => handleChange(e)}
         />
         <FiInfo className={css.errorIcon} />
-        {error?.name && <span className={css.errorMessage}>{error?.name}</span>}
+        {error?.name && (
+          <span id="name-error" className={css.errorMessage} role="alert">
+            {error.name}
+          </span>
+        )}
       </div>
       <div className={clsx(css.formGroup, error?.email && css.error)}>
         <label className={clsx(css.label, css.inputLabel)} htmlFor="email">
@@ -151,17 +158,22 @@ export default function RentalForm({ carId }: RentalFormProps) {
         </label>
         <input
           id="email"
-          type="text"
+          type="email"
           placeholder="Email*"
           name="email"
           className={css.input}
           defaultValue={email}
+          autoComplete="email"
+          aria-invalid={Boolean(error?.email)}
+          aria-describedby={error?.email ? 'email-error' : undefined}
           onBlur={e => handleBlur(e)}
           onChange={e => handleChange(e)}
         />
         <FiInfo className={css.errorIcon} />
         {error?.email && (
-          <span className={css.errorMessage}>{error?.email}</span>
+          <span id="email-error" className={css.errorMessage} role="alert">
+            {error.email}
+          </span>
         )}
       </div>
 
@@ -175,12 +187,16 @@ export default function RentalForm({ carId }: RentalFormProps) {
           className={css.textarea}
           placeholder="Comment"
           defaultValue={comment}
+          aria-invalid={Boolean(error?.comment)}
+          aria-describedby={error?.comment ? 'comment-error' : undefined}
           onBlur={e => handleBlur(e)}
           onChange={e => handleChange(e)}
         />
         <FiInfo className={css.errorIcon} />
         {error?.comment && (
-          <span className={css.errorMessage}>{error?.comment}</span>
+          <span id="comment-error" className={css.errorMessage} role="alert">
+            {error.comment}
+          </span>
         )}
       </div>
       <button

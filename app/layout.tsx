@@ -50,7 +50,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <body className={manrope.variable}>
         <TanStackProvider>
           <Header />
-          <main className="app">{children}</main>
+          <main id="main-content" className="app">
+            {children}
+          </main>
           <ToastWrapper />
         </TanStackProvider>
       </body>
